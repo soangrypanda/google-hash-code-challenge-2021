@@ -1,48 +1,33 @@
-import csv
+# This module takes an input file as an input and parses it.
+# Results are "meta" dict of keys 1, 2, 3, 4. 1's for No of pizzas, the rest - No of teams.
+# The other result is a "pizzas_dict". Keys are pizzas ingredients, values are No of pizzas with such ingredients.
+# Additional result is a "pizzas_list". Which is a list of pizzas.
+# Probably will delete one of "pizzas" at the end.
 
-# automate file openings later
-file_to_parse = open("inp1.in", "r")
+def parse_file(filename):
+    file = open(filename, "r")
 
-# get an info about number of pizzas and teams
-line = file_to_parse.readline().split()
-meta_info = {
-    "pizzas":   line[0],
-    "four":     line[1],
-    "three":    line[2],
-    "two":      line[3]
-}
+    # get info about number of pizzas and teams
+    line = file.readline().split()
+    meta = {
+        1: line[0],  # 1 is for pizzas. don't want to have stings as keys.
+        4: line[1],
+        3: line[2],
+        2: line[3]
+    }
 
-# this is to store info about all ingredients
-# without duplicates
-ingredients = set()
-
-# fill ingredients with unique ingredients
-for line in file_to_parse:
-    line_list = line.split()
-    del line_list[0]
-    ingredients.update(line_list)
-
-# make ingredients orderable
-ingredients = tuple(ingredients)
-
-# well, here i parse the file once again to fill the table
-# could've filled it while parsing the first time
-# but this solution is easier and we have other things to do)
-
-file_to_parse.seek(0)
-file_to_parse.readline()
-row = list()
-
-with open("inp.csv", "w") as outfile:
-    writer = csv.writer(outfile)
-    writer.writerow(ingredients)
-
-    for line in file_to_parse:
+    # get info about pizzas
+    pizzas_dict = {}
+    pizzas_list = []
+    for line in file:
         line_list = line.split()
-        for item in ingredients:
-            if item in line_list:
-                row.append(1)
-            else:
-                row.append(0)
-        writer.writerow(row)
-        row.clear()
+        del line_list[0]
+        line_list.sort()
+        line_list = tuple(line_list)
+        pizzas_list.append(set(line_list))
+        if line_list in pizzas_dict:
+            pizzas_dict[line_list] = pizzas_dict[line_list] + 1
+        else:
+            pizzas_dict[line_list] = 1
+
+    return meta, pizzas_dict, pizzas_list
