@@ -17,6 +17,9 @@
 
 def dp_pizzas(problem, team_len):
     piz_len = len(problem)
+    if piz_len < team_len:
+        sad_return = (set(), 0)
+        return sad_return
     print(f"len of problem is {piz_len}")
     print(f"team_len is {team_len}")
     one_pizza_size = 1
@@ -44,4 +47,4 @@ def dp_pizzas(problem, team_len):
                     dp[i][j][0] = dp[i+1][j-1][0].copy()
                     dp[i][j][0].add(i)
                     dp[i][j][1] = len2
-    return dp
+    return dp[0][team_len]
