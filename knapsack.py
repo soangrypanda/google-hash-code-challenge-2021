@@ -33,8 +33,8 @@ def dp_pizzas(problem, team_len):
 
     for i in range(piz_len - 1, -1, -1):
         for j in range(0, team_len + 1):
+            len1 = dp[i + 1][j][1]
             if j >= one_pizza_size:
-                len1 = dp[i+1][j][1]
                 u_ing = set()
                 u_ing.update(problem[i])
                 for x in dp[i+1][j-one_pizza_size][0]:
@@ -44,7 +44,13 @@ def dp_pizzas(problem, team_len):
                     dp[i][j][0] = dp[i+1][j][0].copy()
                     dp[i][j][1] = len1
                 else:
-                    dp[i][j][0] = dp[i+1][j-1][0].copy()
+                    dp[i][j][0] = dp[i+1][j-one_pizza_size][0].copy()
                     dp[i][j][0].add(i)
                     dp[i][j][1] = len2
+            else:
+                # technically, this branch is redundant in a case of this particular problem as
+                # all the cases falling into this branch are initially set to 0.
+                # and all these cases are 1) empty suffix and 2) 0 size knapsack.
+                dp[i][j][0] = dp[i + 1][j][0].copy()
+                dp[i][j][1] = len1
     return dp[0][team_len]
