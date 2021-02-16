@@ -17,11 +17,11 @@
 
 def dp_pizzas(problem, team_len):
     piz_len = len(problem)
+    print(f"len of problem is {piz_len}")
+    print(f"team_len is {team_len}")
     if piz_len < team_len:
         sad_return = (set(), 0)
         return sad_return
-    print(f"len of problem is {piz_len}")
-    print(f"team_len is {team_len}")
     one_pizza_size = 1
 
     dp = []
@@ -36,9 +36,9 @@ def dp_pizzas(problem, team_len):
             len1 = dp[i + 1][j][1]
             if j >= one_pizza_size:
                 u_ing = set()
-                u_ing.update(problem[i])
+                u_ing.update(problem[i][0])
                 for x in dp[i+1][j-one_pizza_size][0]:
-                    u_ing.update(problem[x])
+                    u_ing.update(problem[x][0])
                 len2 = len(u_ing)
                 if len1 > len2:
                     dp[i][j][0] = dp[i+1][j][0].copy()
