@@ -1,6 +1,8 @@
 # THIS MODULE MAKES AN OUTPUT FILE
 
 def make_out_file(info, inp_name):
+    print("Entering make_out_file...")
+
     out_name = inp_name + ".out"
     f = open(out_name, "w")
     f.write(str(info["deliveries"])+"\n")
@@ -10,4 +12,6 @@ def make_out_file(info, inp_name):
         line += str(team) + " "
         line += " ".join([str(item) for item in pizzas])
         f.write(line+"\n")
+
+    print(f"File {out_name} created!")
     return
