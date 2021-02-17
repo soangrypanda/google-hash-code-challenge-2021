@@ -2,12 +2,11 @@ from parse import *
 from knapsack import *
 from order_or_teams import *
 from out import *
-from itertools import permutations
 
-file_name = "inp1.in"
+file_name = "inp_min"
 (meta, pizzas_list, ing_total) = parse_file(file_name)
+
 print(meta)
-# print(pizzas_list)
 print(f"ing total is {ing_total}")
 
 meta_cpy = meta.copy()
@@ -16,18 +15,16 @@ all_teams = []
 for key, value in meta_cpy.items():
     for i in range(0, int(value)):
         all_teams.append(key)
-print(all_teams)
 print(f"no of teams is {len(all_teams)}")
+
 no_of_pizzas = int(meta[1])
 print(f"no of pizzas is {no_of_pizzas}")
 
-# orders_of_teams = give_all_teams_orders(all_teams)
 optimal_order = dp_teams(all_teams, no_of_pizzas)
 print(optimal_order)
 teams_to_deliver = optimal_order[0]
 
 result = {"value": 0, "deliveries": 0, "piz_to_team": list()}
-
 piz_l_cpy = pizzas_list.copy()
 team_index = 0
 total_deliveries = 0
@@ -73,3 +70,4 @@ print("THAT IS ALL!")
 print(result)
 
 make_out_file(result, file_name)
+print("End of program!")
