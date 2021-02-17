@@ -16,12 +16,13 @@ def parse_file(filename):
 
     # get info about pizzas
     pizzas_list = []
+    ing_total = 0
     index = 0
     for line in file:
         line_list = line.split()
-        del line_list[0]
+        ing_total += int(line_list.pop(0))
         line_list.sort()
         line_list = tuple(line_list)
         pizzas_list.append((line_list, index))  # this worked with sets, look here if mistakes arises
         index += 1
-    return meta, pizzas_list
+    return meta, pizzas_list, ing_total
