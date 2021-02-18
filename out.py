@@ -8,6 +8,7 @@ from os.path import isfile, join
 def give_out_name(inp_name):
     out_name = inp_name
 
+    # should worry about names duplicates in a folder, but for this problem this is enough
     if out_name[len(out_name) - 3:] == ".in":
         out_name = out_name[:len(out_name) - 3] + ".out"
     else:
