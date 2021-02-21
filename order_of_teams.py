@@ -12,9 +12,9 @@ def dp_teams(problem, no_of_piz):
     print(f"Entering dp_teams with no of pizzas {no_of_piz}...")
 
     no_of_teams = len(problem)
-    if no_of_piz < no_of_teams:
-        sad_return = (list(), 0)
-        return sad_return
+    # if no_of_piz < no_of_teams:
+    #    sad_return = (list(), 0)
+    #    return sad_return
 
     dp_empty = list()
     for i in range(0, no_of_piz+1):
