@@ -4,16 +4,16 @@
 
 def parse_file(filename):
     print(f"Entering parse_file for the file {filename}")
-    
+
     file = open(filename, "r")
 
     # get info about number of pizzas and teams
     line = file.readline().split()
     meta = {
         1: line[0],  # 1 is for pizzas. don't want to have stings as keys.
-        4: line[1],
+        2: line[1],
         3: line[2],
-        2: line[3]
+        4: line[3]
     }
 
     # get info about pizzas
@@ -25,8 +25,8 @@ def parse_file(filename):
         ing_total += int(line_list.pop(0))
         line_list.sort()
         line_list = tuple(line_list)
-        pizzas_list.append((line_list, index)) 
+        pizzas_list.append((line_list, index))
         index += 1
-    
+
     print("parse_file is ready to return!")
     return meta, pizzas_list, ing_total
