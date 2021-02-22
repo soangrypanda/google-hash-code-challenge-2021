@@ -1,5 +1,5 @@
 # I should tell you, this is a very, very shady way of solving this problem. If you need a normal way, look into
-# order_or_teams.py - this is correct, but much slower.
+# order_or_teams.py - it is correct, but much slower.
 # Lets call this module an "experimental approximation".
 # But it still gives a list of teams for knapsack.py to process that is good.
 
