@@ -2,6 +2,7 @@ from parse import *
 from knapsack import *
 from order_or_teams import *
 from out import *
+from greedy import *
 
 dir_path = Path(__file__).parent.absolute()
 inp_files, inp_path = give_inp_files(dir_path)
@@ -24,9 +25,7 @@ for file_name in inp_files:
     no_of_pizzas = int(meta[1])
     print(f"no of pizzas is {no_of_pizzas}")
 
-    optimal_order = dp_teams(all_teams, no_of_pizzas)
-    print(optimal_order)
-    teams_to_deliver = optimal_order[0]
+    teams_to_deliver = greedy(meta)
 
     result = {"value": 0, "deliveries": 0, "piz_to_team": list()}
     piz_l_cpy = pizzas_list.copy()
